@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  dev_net:
+
+services:
+  docker-nacos:
+    hostname: nacos
+    image: nacos/nacos-server:v2.2.3
+    volumes:
+      - "./logs:/home/nacos/logs"
+      - "./init.d/custom.properties:/home/nacos/init.d/custom.properties"
+    environment:
+      - JVM_XMS=256m
+      - JVM_XMX=256m
+      - MODE=standalone
+      - PREFER_HOST_MODE=hostname
+    ports:
+      - "8848:8848"
+    networks:
+      - dev_net
